@@ -1,0 +1,287 @@
+/* ----- Texts ------------------------------------------------------------------------------------------ */
+
+/* General */
+* {
+    font-family: "Roboto","Sans-serif";
+    font-weight: 400;
+}
+
+p {
+    font-size: 14px;
+    line-height: 20px;
+}
+
+h2 {
+    font-family: "Roboto","Sans-serif";
+    font-weight: 700;
+    text-align: center;
+    padding: 23px 0px;
+}
+/* ------------------------------------------------------------ */
+
+/* Login Screen */
+.screen-login input {
+    text-align: center;
+    font-size: 18px;
+    line-height: 25px;
+}
+
+.screen-login input::placeholder {
+    color: #AEAEAE;
+}
+
+.screen-login button {
+    color: #696969;
+    text-align: center;
+    font-family: "Roboto","Sans-serif";
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 25px;
+}
+/* ------------------------------------------------------------ */
+
+/* Chat Screen */
+.time {
+    color: #AAAAAA;
+}
+
+.name {
+    font-weight: 700;
+}
+
+footer input {
+    font-size: 18px;
+    line-height: 21px;
+}
+
+footer input::placeholder {
+    color: #000000;
+    font-style: italic;
+}
+/* ------------------------------------------------------------ */
+
+/* Contacts Screen */
+aside p {
+    font-family: "Roboto","Sans-serif";
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 19px;
+}
+/* ------------------------------------------------------------ */
+
+/* ----- Tags and Divs ------------------------------------------------------------------------------------------ */
+
+/* General */
+* {
+    box-sizing: border-box;
+    color: #000000;
+}
+
+.hidden {
+    display: none !important; 
+}
+
+body {
+    background-color: #E5E5E5;
+}
+
+.container-content {
+    width: 375px;
+    height: 100%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+header ion-icon, footer ion-icon, .box-option, .blurred-chat {
+    cursor: pointer;
+}
+/* ------------------------------------------------------------ */
+
+/* Login Screen */
+.screen-login {
+    background-color: #FFFFFF;
+}
+
+.screen-login img {
+    display: block;
+    width: 130px;
+
+    padding-top: 72px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 94px;
+}
+
+.screen-login input {
+    display: block;
+    width: 261px;
+    height: 54px;
+    border: #D7D7D7 solid 1px;
+    border-radius: 4px;
+
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 15px;
+}
+
+.screen-login button {
+    display: block;
+    width: 109px;
+    height: 45px;
+    background-color: #E7E7E7;
+    border-radius: 9px;
+
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* ------------------------------------------------------------ */
+
+/* Chat Screen */
+.screen-chat {
+    background-color: #F3F3F3;
+    min-height: 100vh;
+    padding: 104px 0px;
+}
+
+/* Header */
+.container-header {
+    position: fixed;
+    z-index: 1;
+    top: 0px;
+    width: 100%;
+}
+
+header {
+    background-color: #FFFFFF;
+    width: 375px;
+    height: 80px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0px 21px;
+
+    filter: drop-shadow(0px 4px 6px rgba(0, 0, 0, 0.05));
+    clip-path: inset(0px 0px -30px 0px);
+}
+
+header img {
+    display: block;
+    width: 75px;
+}
+
+header ion-icon {
+    font-size: 45px;
+}
+
+/* Main */
+.msg {
+    margin: 4px 0px;
+    padding: 10px 8px;
+    width: 100%;
+    border-radius: 2px;
+}
+
+.info {
+    background-color: #DCDCDC;
+}
+
+.public {
+    background-color: #FFFFFF;
+}
+
+.private {
+    background-color: #FFDEDE;
+}
+
+
+/* Footer */
+.container-footer {
+    position: fixed;
+    z-index: 1;
+    bottom: 0px;
+    width: 100%;
+}
+
+footer {
+    background-color: #FFFFFF;
+    width: 375px;
+    height: 80px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0px 17px;
+
+    filter: drop-shadow(0px -4px 6px rgba(0, 0, 0, 0.05));
+    clip-path: inset(-30px 0px 0px 0px);
+}
+
+footer input {
+    display: block;
+    width: 300px;
+    height: 30px;
+    border: none;
+}
+
+footer ion-icon {
+    font-size: 26px;
+}
+
+/* ------------------------------------------------------------ */
+
+/* Contacts Screen */
+.container-screen-contacts {
+    position: fixed;
+    z-index: 2;
+    width: 375px;
+    height: 100%;
+    top: 0px;
+    background-color: rgba(0, 0, 0, 0.6);
+}
+
+.screen-contacts {
+    width: 100%;
+    height: 100%;
+    display: flex;
+}
+
+.blurred-chat {
+    width: 116px;
+    height: 100%;
+}
+
+aside {
+    background-color: #FFFFFF;
+    width: 259px;
+    height: 100vh;
+}
+
+.box-option {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0px 18px;
+}
+
+.option {
+    display: flex;
+    align-items: center;
+    height: 36px;
+}
+
+.contact .option ion-icon {
+    color: #000000;
+    font-size: 25px;
+    margin-right: 7px;
+}
+
+.visibility .option ion-icon {
+    color: #000000;
+    font-size: 22px;
+    margin-right: 7px;
+}
+
+.selected {
+    color: #28BB25;
+    font-size: 18px;
+}
