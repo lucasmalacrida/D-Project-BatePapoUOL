@@ -5,36 +5,45 @@ const nameInput = document.getElementById('input-login');
 nameInput.addEventListener("keypress", function(event){ (event.key === "Enter")? document.querySelector(".box-login button").click() : null });
 
 function login(){
-    document.querySelector('.box-login').classList.add('hidden');
-    document.querySelector('.box-loading').classList.remove('hidden');
     user = {name: nameInput.value};
+    if (user.name === "Todos") {return alert("Nome inválido!");}
+
+    document.querySelector('.box-login').classList.add('hidden');
     axios.post('https://mock-api.driven.com.br/api/v6/uol/participants',user).then(loginSucess).catch(loginError);
+    document.querySelector('.box-loading').classList.remove('hidden');
 }
 
 function loginError(Response){
     let statusCode = Response.response.status;
     if (statusCode===400){
-        alert('Usuário já logado!');
+        alert("Usuário já logado!");
         document.querySelector('.box-login').classList.remove('hidden');
         document.querySelector('.box-loading').classList.add('hidden');
     } else {
-        alert('Erro desconhecido');
+        alert("Ocorreu um erro durante a execução.");
     }
 }
 
-function loginSucess(){
-    document.querySelector('.screen-login').classList.add('hidden');
-    document.querySelector('.screen-chat').classList.remove('hidden');
-    loadMsgs();
-    loadContacts();
-    refreshMsgs = setInterval(loadMsgs,3000);
-    refreshContacts = setInterval(loadContacts,10000);
-
-    refreshLogin = setInterval(keepLogged,5000);
+function loginSucess(Response){
+    let statusCode = Response.status;
+    if (statusCode===200){
+        document.querySelector('.screen-login').classList.add('hidden');
+        document.querySelector('.screen-chat').classList.remove('hidden');
+        loadMsgs();
+        loadContacts();
+        refreshMsgs = setInterval(loadMsgs,3000);
+        refreshContacts = setInterval(loadContacts,10000);
+    
+        refreshLogin = setInterval(keepLogged,5000);
+    } else {
+        alert("Ocorreu um erro durante a execução.");
+        document.querySelector('.box-login').classList.remove('hidden');
+        document.querySelector('.box-loading').classList.add('hidden');
+    }
 }
 
 function keepLogged(){
-    axios.post('https://mock-api.driven.com.br/api/v6/uol/status',user).catch(x => alert(`Erro ${x.response.status}`));
+    axios.post('https://mock-api.driven.com.br/api/v6/uol/status',user).catch(Response => console.log(Response.message));
 }
 
 // Load Messages: ------------------------------------------------------------------------------------------------------------------------
@@ -60,11 +69,11 @@ function insertMsgsDOM(Response){
             </p>`;
         }
     }
-    mainTag.lastChild.scrollIntoView({behavior:'smooth'});
+    mainTag.lastElementChild.scrollIntoView({behavior:'smooth'});
 }
 
 function loadMsgs(){
-    axios.get('https://mock-api.driven.com.br/api/v6/uol/messages').then(insertMsgsDOM).catch(Response => alert(Response.message));
+    axios.get('https://mock-api.driven.com.br/api/v6/uol/messages').then(insertMsgsDOM).catch(Response => console.log(Response.message));
 }
 
 // Load Contacts: ------------------------------------------------------------------------------------------------------------------------
@@ -89,7 +98,7 @@ function insertContactsDOM(Response){
 }
 
 function loadContacts(){
-    axios.get('https://mock-api.driven.com.br/api/v6/uol/participants').then(insertContactsDOM).catch(Response => alert(Response.message));
+    axios.get('https://mock-api.driven.com.br/api/v6/uol/participants').then(insertContactsDOM).catch(Response => console.log(Response.message));
 }
 
 // Open/Close Contacts Menu ------------------------------------------------------------------------------------------------------------------------
@@ -156,6 +165,16 @@ function sendMsg(){
         text: msgInput.value,
         type: (visibility === "Reservadamente")? "private_message" : "message"
     }
-    axios.post('https://mock-api.driven.com.br/api/v6/uol/messages',msgObject).catch(x => alert(`Erro ${x.response.status}`));
     msgInput.value = '';
+
+    axios.post('https://mock-api.driven.com.br/api/v6/uol/messages',msgObject).then(sendMsgSucess).catch(sendMsgError);
+
+    function sendMsgSucess(Response){
+        loadMsgs();
+    }
+
+    function sendMsgError(Response){
+        alert("Erro de conexão. Por favor, refaça o login.");
+        window.location.reload()
+    }
 }
