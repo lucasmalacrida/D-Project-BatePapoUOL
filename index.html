@@ -43,7 +43,10 @@
   
         <div class="container-footer">
           <footer>
-            <input type="text" name="input-msg" placeholder="Escreva aqui...">
+            <div class="box-msg">
+              <input type="text" name="input-msg" placeholder="Escreva aqui...">
+              <p>Enviando para <span class="chat-with">Todos</span> (<span class="chat-mode">Público</span>)</p>
+            </div>
             <ion-icon name="paper-plane-outline" onclick="sendMsg()"></ion-icon>
           </footer>
         </div>
@@ -52,48 +55,54 @@
       <!-- Contacts Screen -->
       <div class="container-screen-contacts hidden">
         <div class="screen-contacts">
-          <div class="blurred-chat" onclick="backToChat()"></div>
+          <div class="blurred-chat" onclick="closeContacts()"></div>
           <aside>
+            <!-- Contact -->
             <h2>Escolha um contato<br>para enviar mensagem:</h2>
-            <div class="box-option contact" onclick="selectContact()">
-              <div class="option">
-                <ion-icon name="people"></ion-icon>
-                <p>Todos</p>
+            <div class="contacts">
+              <div class="box-option selected" onclick="selectContact(this);chatInfo()">
+                <div class="option">
+                  <ion-icon name="people"></ion-icon>
+                  <p>Todos</p>
+                </div>
+                <ion-icon name="checkmark-sharp"></ion-icon>
               </div>
-              <ion-icon name="checkmark-sharp" class="selected hidden"></ion-icon>
-            </div>
-  
-            <div class="box-option contact" onclick="selectContact()">
-              <div class="option">
-                <ion-icon name="person-circle"></ion-icon>
-                <p>João</p>
+    
+              <div class="box-option" onclick="selectContact(this);chatInfo()">
+                <div class="option">
+                  <ion-icon name="person-circle"></ion-icon>
+                  <p>João</p>
+                </div>
+                <ion-icon name="checkmark-sharp" class="hidden"></ion-icon>
               </div>
-              <ion-icon name="checkmark-sharp" class="selected hidden"></ion-icon>
-            </div>
-  
-            <div class="box-option contact" onclick="selectContact()">
-              <div class="option">
-                <ion-icon name="person-circle"></ion-icon>
-                <p>Maria</p>
+    
+              <div class="box-option" onclick="selectContact(this);chatInfo()">
+                <div class="option">
+                  <ion-icon name="person-circle"></ion-icon>
+                  <p>Maria</p>
+                </div>
+                <ion-icon name="checkmark-sharp" class="hidden"></ion-icon>
               </div>
-              <ion-icon name="checkmark-sharp" class="selected"></ion-icon>
-            </div>
-  
-            <h2>Escolha a visibilidade:</h2>
-            <div class="box-option visibility" onclick="selectVisibility()">
-              <div class="option">
-                <ion-icon name="lock-open"></ion-icon>
-                <p>Público</p>
-              </div>
-              <ion-icon name="checkmark-sharp" class="selected hidden"></ion-icon>
             </div>
             
-            <div class="box-option visibility" onclick="selectVisibility()">
-              <div class="option">
-                <ion-icon name="lock-closed"></ion-icon>
-                <p>Reservadamente</p>
+            <!-- Visibility -->
+            <h2>Escolha a visibilidade:</h2>
+            <div class="visibilities">
+              <div class="box-option visibility selected" onclick="selectVisibility(this);chatInfo()">
+                <div class="option">
+                  <ion-icon name="lock-open"></ion-icon>
+                  <p>Público</p>
+                </div>
+                <ion-icon name="checkmark-sharp"></ion-icon>
               </div>
-              <ion-icon name="checkmark-sharp" class="selected"></ion-icon>
+              
+              <div class="box-option visibility" onclick="selectVisibility(this);chatInfo()">
+                <div class="option">
+                  <ion-icon name="lock-closed"></ion-icon>
+                  <p>Reservadamente</p>
+                </div>
+                <ion-icon name="checkmark-sharp" class="hidden"></ion-icon>
+              </div>
             </div>
           </aside>
         </div>

@@ -49,14 +49,26 @@ h2 {
     font-weight: 700;
 }
 
+.box-msg {
+    padding-top: 15px;
+}
+
 footer input {
     font-size: 18px;
-    line-height: 21px;
+    line-height: 25px;
 }
 
 footer input::placeholder {
     color: #000000;
     font-style: italic;
+}
+
+footer p, footer span {
+    color: #505050;
+    font-family: "Roboto","Sans-serif";
+    font-weight: 300;
+    font-size: 14px;
+    line-height: 25px;
 }
 /* ------------------------------------------------------------ */
 
@@ -269,19 +281,19 @@ aside {
     height: 36px;
 }
 
-.contact .option ion-icon {
+.contacts .option ion-icon {
     color: #000000;
     font-size: 25px;
     margin-right: 7px;
 }
 
-.visibility .option ion-icon {
+.visibilities .option ion-icon {
     color: #000000;
     font-size: 22px;
     margin-right: 7px;
 }
 
-.selected {
+.box-option > ion-icon {
     color: #28BB25;
     font-size: 18px;
 }

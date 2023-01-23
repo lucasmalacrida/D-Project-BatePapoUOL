@@ -55,4 +55,54 @@ function loadMsgs(){
     axios.get('https://mock-api.driven.com.br/api/v6/uol/messages').then(insertMsgsDOM).catch(Response => alert(Response.message));
 }
 
-// Keep Logged ------------------------------------------------------------------------------------------------------------------------
+// Open/Close Contacts Menu ------------------------------------------------------------------------------------------------------------------------
+function openContacts(){
+    document.querySelector('.container-screen-contacts').classList.remove('hidden');
+}
+
+function closeContacts(){
+    document.querySelector('.container-screen-contacts').classList.add('hidden');
+}
+
+// Select Contact & Visibility ------------------------------------------------------------------------------------------------------------------------
+let contact = "Todos";
+function selectContact(button){
+    if (button.firstElementChild.lastElementChild.innerHTML === "Todos" && visibility === "Reservadamente") {
+        selectVisibility(document.querySelector(".visibilities").firstElementChild);
+    }
+    let buttonSelected = document.querySelector(".contacts .selected");
+    let checkMarked = document.querySelector(".contacts .selected > ion-icon");
+
+    if (buttonSelected !== null){
+        buttonSelected.classList.remove("selected");
+        checkMarked.classList.add("hidden");
+    }
+    button.classList.add("selected");
+    document.querySelector(".contacts .selected > ion-icon").classList.remove("hidden");
+
+    contact = document.querySelector(".contacts .selected p").innerHTML;
+}
+
+let visibility = "Público";
+function selectVisibility(button){
+    if (contact === "Todos" && button.firstElementChild.lastElementChild.innerHTML === "Reservadamente") {
+        return;
+    } else {
+        let buttonSelected = document.querySelector(".visibilities .selected");
+        let checkMarked = document.querySelector(".visibilities .selected > ion-icon");
+
+        if (buttonSelected !== null){
+            buttonSelected.classList.remove("selected");
+            checkMarked.classList.add("hidden");
+        }
+        button.classList.add("selected");
+        document.querySelector(".visibilities .selected > ion-icon").classList.remove("hidden");
+
+        visibility = document.querySelector(".visibilities .selected p").innerHTML;
+    }
+}
+
+function chatInfo(){
+    document.querySelector(".chat-with").innerHTML = contact;
+    document.querySelector(".chat-mode").innerHTML = visibility;
+}
