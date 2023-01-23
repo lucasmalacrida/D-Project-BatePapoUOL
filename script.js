@@ -1,5 +1,5 @@
 // Login & Keep Logged: ------------------------------------------------------------------------------------------------------------------------
-let user, refreshMsgs, postStatus, refreshLogin;
+let user, refreshMsgs, refreshContacts, refreshLogin, postStatus;
 
 user = {name: prompt('Digite seu nome:')};
 axios.post('https://mock-api.driven.com.br/api/v6/uol/participants',user).then(loginSucess).catch(loginError);
@@ -17,7 +17,10 @@ function loginError(Response){
 
 function loginSucess(){
     loadMsgs();
+    loadContacts();
     refreshMsgs = setInterval(loadMsgs,3000);
+    refreshContacts = setInterval(loadContacts,10000);
+
     refreshLogin = setInterval(keepLogged,5000);
 }
 
@@ -41,18 +44,41 @@ function insertMsgsDOM(Response){
             `<p class="msg public">
             <span class="time">${data[i].time}</span> <span class="name">${data[i].from}</span> para <span class="name">${data[i].to}</span>: ${data[i].text}
             </p>`;
-        } else if (data[i].type === 'private_message' &&  user.name === (data[i].to || data[i].from)){
+        } else if (data[i].type === 'private_message' &&  (data[i].to === user.name || data[i].from === user.name)){
             mainTag.innerHTML +=
             `<p class="msg private">
                 <span class="time">${data[i].time}</span> <span class="name">${data[i].from}</span> reservadamente para <span class="name">${data[i].to}</span>: ${data[i].text}
             </p>`;
         }
     }
-    mainTag.lastChild.scrollIntoView();
+    mainTag.lastChild.scrollIntoView({behavior:'smooth'});
 }
 
 function loadMsgs(){
     axios.get('https://mock-api.driven.com.br/api/v6/uol/messages').then(insertMsgsDOM).catch(Response => alert(Response.message));
+}
+
+// Load Contacts: ------------------------------------------------------------------------------------------------------------------------
+const contactsDivInitial = document.querySelector('.contacts').innerHTML;
+
+function insertContactsDOM(Response){
+    const data = Response.data;
+    let contactsDiv = document.querySelector('.contacts');
+    contactsDiv.innerHTML = contactsDivInitial;
+    for (let i=0; i<data.length; i++){
+        contactsDiv.innerHTML +=
+            `<div class="box-option" onclick="selectContact(this);chatInfo()">
+            <div class="option">
+            <ion-icon name="person-circle"></ion-icon>
+            <p>${data[i].name}</p>
+            </div>
+            <ion-icon name="checkmark-sharp" class="hidden"></ion-icon>
+            </div>`;
+    }
+}
+
+function loadContacts(){
+    axios.get('https://mock-api.driven.com.br/api/v6/uol/participants').then(insertContactsDOM).catch(Response => alert(Response.message));
 }
 
 // Open/Close Contacts Menu ------------------------------------------------------------------------------------------------------------------------
