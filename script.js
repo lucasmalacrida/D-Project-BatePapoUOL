@@ -2,7 +2,7 @@
 let user, refreshMsgs, refreshContacts, refreshLogin;
 
 const nameInput = document.getElementById('input-login');
-nameInput.addEventListener("keypress", function(event){ (event.key === "Enter")? document.querySelector(".box-login button").click() : null });
+nameInput.addEventListener("keypress", function(event){ (event.key === "Enter")? document.querySelector(".box-login button").click() : funcNull() });
 
 function login(){
     user = {name: nameInput.value};
@@ -77,15 +77,25 @@ function loadMsgs(){
 }
 
 // Load Contacts: ------------------------------------------------------------------------------------------------------------------------
-const contactsDivInitial = document.querySelector('.contacts').innerHTML;
+const contactsList = document.querySelector('.contacts');
 
 function insertContactsDOM(Response){
-    const data = Response.data;
-    let contactsDiv = document.querySelector('.contacts');
-    contactsDiv.innerHTML = contactsDivInitial;
+    let data = Response.data;
+    let contactTodos = contactsList.firstElementChild;
+    contactsList.innerHTML = contactTodos.outerHTML;
+    if (data.map(x => x.name).includes(contact) && contact !== "Todos"){
+        contactsList.innerHTML += 
+            `<li class="box-option selected" data-test="participant" onclick="selectContact(this);chatInfo()">
+                    <div class="option">
+                        <ion-icon name="person-circle"></ion-icon>
+                        <p>${contact}</p>
+                    </div>
+                    <ion-icon name="checkmark-sharp" data-test="check"></ion-icon>
+            </li>`;
+    }
     for (let i=0; i<data.length; i++){
-        if (data[i].name !== user.name){
-            contactsDiv.innerHTML +=
+        if ( ! [user.name,contact].includes(data[i].name) ){
+            contactsList.innerHTML +=
                 `<li class="box-option" data-test="participant" onclick="selectContact(this);chatInfo()">
                     <div class="option">
                         <ion-icon name="person-circle"></ion-icon>
@@ -156,7 +166,7 @@ function chatInfo(){
 // Send Message ------------------------------------------------------------------------------------------------------------------------
 const msgInput = document.getElementById('input-msg');
 
-msgInput.addEventListener("keypress", function(event){ (event.key === "Enter")? document.querySelector("footer ion-icon").click() : null });
+msgInput.addEventListener("keypress", function(event){ (event.key === "Enter")? document.querySelector("footer ion-icon").click() : funcNull() });
 
 function sendMsg(){
     let msgObject = {

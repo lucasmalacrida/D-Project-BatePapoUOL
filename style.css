@@ -2,7 +2,7 @@
 
 /* General */
 * {
-    font-family: "Roboto","Sans-serif";
+    font-family: "Roboto","Sans-Serif";
     font-weight: 400;
     font-size: 14px;
     line-height: 20px;
@@ -15,7 +15,7 @@ p, li {
 }
 
 h2 {
-    font-family: "Roboto","Sans-serif";
+    font-family: "Roboto","Sans-Serif";
     font-weight: 700;
     text-align: center;
     padding: 23px 0px;
@@ -36,14 +36,14 @@ h2 {
 .screen-login button {
     color: #696969;
     text-align: center;
-    font-family: "Roboto","Sans-serif";
+    font-family: "Roboto","Sans-Serif";
     font-weight: 400;
     font-size: 18px;
     line-height: 25px;
 }
 
 .box-loading p {
-    font-family: "Roboto","Sans-serif";
+    font-family: "Roboto","Sans-Serif";
     font-weight: 400;
     font-size: 18px;
     line-height: 20px;
@@ -76,7 +76,7 @@ footer input::placeholder {
 
 footer p, footer span {
     color: #505050;
-    font-family: "Roboto","Sans-serif";
+    font-family: "Roboto","Sans-Serif";
     font-weight: 300;
     font-size: 14px;
     line-height: 25px;
@@ -89,7 +89,7 @@ footer p, footer span {
 
 /* Contacts Screen */
 aside p {
-    font-family: "Roboto","Sans-serif";
+    font-family: "Roboto","Sans-Serif";
     font-weight: 400;
     font-size: 16px;
     line-height: 19px;
@@ -181,7 +181,6 @@ header ion-icon, footer ion-icon, .box-option, .blurred-chat {
     margin: 50px auto 0px;
     width: 140px;
 }
-
 /* ------------------------------------------------------------ */
 
 /* Chat Screen */
@@ -246,7 +245,6 @@ header ion-icon {
     padding-right: 8px;
 }
 
-
 /* Footer */
 .container-footer {
     position: fixed;
@@ -289,7 +287,6 @@ footer p {
 footer ion-icon {
     font-size: 26px;
 }
-
 /* ------------------------------------------------------------ */
 
 /* Contacts Screen */
@@ -317,6 +314,16 @@ aside {
     background-color: #FFFFFF;
     width: 259px;
     height: 100vh;
+}
+
+.contacts {
+    max-height: calc(100vh - 220px);
+    overflow-y: scroll;
+    -ms-overflow-style: none;
+    scrollbar-width: none; 
+}
+.contacts::-webkit-scrollbar {
+    display: none;
 }
 
 .box-option {
