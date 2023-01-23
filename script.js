@@ -1,21 +1,30 @@
 // Login & Keep Logged: ------------------------------------------------------------------------------------------------------------------------
 let user, refreshMsgs, refreshContacts, refreshLogin;
 
-user = {name: prompt('Digite seu nome:')};
-axios.post('https://mock-api.driven.com.br/api/v6/uol/participants',user).then(loginSucess).catch(loginError);
+const nameInput = document.getElementById('input-login');
+nameInput.addEventListener("keypress", function(event){ (event.key === "Enter")? document.querySelector(".box-login button").click() : null });
+
+function login(){
+    document.querySelector('.box-login').classList.add('hidden');
+    document.querySelector('.box-loading').classList.remove('hidden');
+    user = {name: nameInput.value};
+    axios.post('https://mock-api.driven.com.br/api/v6/uol/participants',user).then(loginSucess).catch(loginError);
+}
 
 function loginError(Response){
     let statusCode = Response.response.status;
     if (statusCode===400){
         alert('Usuário já logado!');
-        user = {name: prompt('Digite seu nome:')};
-        axios.post('https://mock-api.driven.com.br/api/v6/uol/participants',user).then(loginSucess).catch(loginError);
+        document.querySelector('.box-login').classList.remove('hidden');
+        document.querySelector('.box-loading').classList.add('hidden');
     } else {
         alert('Erro desconhecido');
     }
 }
 
 function loginSucess(){
+    document.querySelector('.screen-login').classList.add('hidden');
+    document.querySelector('.screen-chat').classList.remove('hidden');
     loadMsgs();
     loadContacts();
     refreshMsgs = setInterval(loadMsgs,3000);

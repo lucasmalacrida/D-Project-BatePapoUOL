@@ -22,14 +22,20 @@
     <div class="container-content">
 
       <!-- Login Screen-->
-      <div class="screen-login hidden">
+      <div class="screen-login">
         <img alt="Bate-Papo UOL" src="./media/bate-papo.png">
-        <input type="text" name="input-login" placeholder="Digite seu nome">
-        <button onclick="login()">Entrar</button>
+        <div class="box-login">
+          <input type="text" name="input-login" id="input-login" placeholder="Digite seu nome">
+          <button onclick="login()">Entrar</button>
+        </div>
+        <div class="box-loading hidden">
+          <img alt="Loading" src="./media/loading.gif">
+          <p>Entrando...</p>
+        </div>
       </div>
 
       <!-- Chat Screen -->
-      <div class="screen-chat">
+      <div class="screen-chat hidden">
         <div class="container-header">
           <header>
             <img alt="Bate-Papo UOL" src="./media/bate-papo.png">
@@ -44,7 +50,7 @@
         <div class="container-footer">
           <footer>
             <div class="box-msg">
-              <input type="text" name="input-msg" placeholder="Escreva aqui..." id="input-msg">
+              <input type="text" name="input-msg" id="input-msg" placeholder="Escreva aqui...">
               <p>Enviando para <span class="chat-with">Todos</span> (<span class="chat-mode">Público</span>)</p>
             </div>
             <ion-icon name="paper-plane-outline" onclick="sendMsg()"></ion-icon>

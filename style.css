@@ -4,6 +4,8 @@
 * {
     font-family: "Roboto","Sans-serif";
     font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
 }
 
 p {
@@ -37,6 +39,14 @@ h2 {
     font-weight: 400;
     font-size: 18px;
     line-height: 25px;
+}
+
+.box-loading p {
+    font-family: "Roboto","Sans-serif";
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 20px;
+    text-align: center;
 }
 /* ------------------------------------------------------------ */
 
@@ -112,39 +122,45 @@ header ion-icon, footer ion-icon, .box-option, .blurred-chat {
 /* Login Screen */
 .screen-login {
     background-color: #FFFFFF;
+    height: 100vh;
 }
 
-.screen-login img {
+.screen-login > img {
     display: block;
     width: 130px;
 
     padding-top: 72px;
-    margin-left: auto;
-    margin-right: auto;
-    margin-bottom: 94px;
+    margin: 0px auto;
 }
 
-.screen-login input {
+.box-login {
+    margin-top: 94px;
+}
+
+.box-login input {
     display: block;
     width: 261px;
     height: 54px;
     border: #D7D7D7 solid 1px;
     border-radius: 4px;
 
-    margin-left: auto;
-    margin-right: auto;
-    margin-bottom: 15px;
+    margin: 0px auto 15px;
 }
 
-.screen-login button {
+.box-login button {
     display: block;
     width: 109px;
     height: 45px;
     background-color: #E7E7E7;
     border-radius: 9px;
 
-    margin-left: auto;
-    margin-right: auto;
+    margin: 0px auto;
+}
+
+.box-loading img {
+    display: block;
+    margin: 50px auto 0px;
+    width: 140px;
 }
 
 /* ------------------------------------------------------------ */
