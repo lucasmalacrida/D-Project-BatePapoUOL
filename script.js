@@ -1,6 +1,33 @@
+// Login & Keep Logged: ------------------------------------------------------------------------------------------------------------------------
+let user, refreshMsgs, postStatus, refreshLogin;
+
+user = {name: prompt('Digite seu nome:')};
+axios.post('https://mock-api.driven.com.br/api/v6/uol/participants',user).then(loginSucess).catch(loginError);
+
+function loginError(Response){
+    let statusCode = Response.response.status;
+    if (statusCode===400){
+        alert('Usuário já logado!');
+        user = {name: prompt('Digite seu nome:')};
+        axios.post('https://mock-api.driven.com.br/api/v6/uol/participants',user).then(loginSucess).catch(loginError);
+    } else {
+        alert('Erro desconhecido');
+    }
+}
+
+function loginSucess(){
+    loadMsgs();
+    refreshMsgs = setInterval(loadMsgs,3000);
+    refreshLogin = setInterval(keepLogged,5000);
+}
+
+function keepLogged(){
+    postStatus = axios.post('https://mock-api.driven.com.br/api/v6/uol/status',user).catch(x => alert(`Erro ${x.response.status}`));
+}
+
 // Load Messages: ------------------------------------------------------------------------------------------------------------------------
-function insertMsgsDOM(response){
-    const data = response.data;
+function insertMsgsDOM(Response){
+    const data = Response.data;
     let mainTag = document.querySelector('main');
     mainTag.innerHTML = '';
     for (let i=0; i<data.length; i++){
@@ -25,8 +52,7 @@ function insertMsgsDOM(response){
 }
 
 function loadMsgs(){
-    axios.get('https://mock-api.driven.com.br/api/v6/uol/messages').then(insertMsgsDOM).catch(response => alert(response.message));
+    axios.get('https://mock-api.driven.com.br/api/v6/uol/messages').then(insertMsgsDOM).catch(Response => alert(Response.message));
 }
-loadMsgs();
-const refreshMsgs = setInterval(loadMsgs,3000);
-// ------------------------------------------------------------------------------------------------------------------------
+
+// Keep Logged ------------------------------------------------------------------------------------------------------------------------
