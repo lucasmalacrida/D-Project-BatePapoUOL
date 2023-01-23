@@ -49,27 +49,27 @@ function keepLogged(){
 // Load Messages: ------------------------------------------------------------------------------------------------------------------------
 function insertMsgsDOM(Response){
     const data = Response.data;
-    let mainTag = document.querySelector('main');
-    mainTag.innerHTML = '';
+    let ulTag = document.querySelector('main ul');
+    ulTag.innerHTML = '';
     for (let i=0; i<data.length; i++){
         if (data[i].type === 'status'){
-            mainTag.innerHTML +=
-            `<p class="msg status">
+            ulTag.innerHTML +=
+            `<li class="msg status" data-test="message">
                 <span class="time">(${data[i].time})</span><span class="name">${data[i].from}</span> ${data[i].text}
-            </p>`;
+            </li>`;
         } else if (data[i].type === 'message'){
-            mainTag.innerHTML +=
-            `<p class="msg public">
+            ulTag.innerHTML +=
+            `<li class="msg public" data-test="message">
             <span class="time">(${data[i].time})</span><span class="name">${data[i].from}</span> para <span class="name">${data[i].to}</span>: ${data[i].text}
-            </p>`;
+            </li>`;
         } else if (data[i].type === 'private_message' &&  (data[i].to === user.name || data[i].from === user.name)){
-            mainTag.innerHTML +=
-            `<p class="msg private">
+            ulTag.innerHTML +=
+            `<li class="msg private" data-test="message">
                 <span class="time">(${data[i].time})</span><span class="name">${data[i].from}</span> reservadamente para <span class="name">${data[i].to}</span>: ${data[i].text}
-            </p>`;
+            </li>`;
         }
     }
-    mainTag.lastElementChild.scrollIntoView({behavior:'smooth'});
+    ulTag.lastElementChild.scrollIntoView({behavior:'smooth'});
 }
 
 function loadMsgs(){
@@ -86,13 +86,13 @@ function insertContactsDOM(Response){
     for (let i=0; i<data.length; i++){
         if (data[i].name !== user.name){
             contactsDiv.innerHTML +=
-                `<div class="box-option" onclick="selectContact(this);chatInfo()">
-                <div class="option">
-                <ion-icon name="person-circle"></ion-icon>
-                <p>${data[i].name}</p>
-                </div>
-                <ion-icon name="checkmark-sharp" class="hidden"></ion-icon>
-                </div>`;
+                `<li class="box-option" data-test="participant" onclick="selectContact(this);chatInfo()">
+                    <div class="option">
+                        <ion-icon name="person-circle"></ion-icon>
+                        <p>${data[i].name}</p>
+                    </div>
+                    <ion-icon name="checkmark-sharp" data-test="check" class="hidden"></ion-icon>
+                </li>`;
         }
     }
 }

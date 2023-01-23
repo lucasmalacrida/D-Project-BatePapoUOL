@@ -25,8 +25,8 @@
       <div class="screen-login">
         <img alt="Bate-Papo UOL" src="./media/bate-papo.png">
         <div class="box-login">
-          <input type="text" name="input-login" id="input-login" placeholder="Digite seu nome">
-          <button onclick="login()">Entrar</button>
+          <input type="text" name="input-login" id="input-login" data-test="input-name" placeholder="Digite seu nome">
+          <button data-test="send-name" onclick="login()">Entrar</button>
         </div>
         <div class="box-loading hidden">
           <img alt="Loading" src="./media/loading.gif">
@@ -39,21 +39,23 @@
         <div class="container-header">
           <header>
             <img alt="Bate-Papo UOL" src="./media/bate-papo.png">
-            <ion-icon name="people" onclick="openContacts()"></ion-icon>
+            <ion-icon name="people" data-test="open-participants" onclick="openContacts()"></ion-icon>
           </header>
         </div>
 
         <main>
-          <!-- Messages Here -->
+          <ul>
+            <!-- Messages Here -->
+          </ul>
         </main>
   
         <div class="container-footer">
           <footer>
             <div class="box-msg">
-              <input type="text" name="input-msg" id="input-msg" placeholder="Escreva aqui...">
-              <p>Enviando para <span class="chat-with">Todos</span> (<span class="chat-mode">Público</span>)</p>
+              <input type="text" name="input-msg" id="input-msg" data-test="input-message" placeholder="Escreva aqui...">
+              <p data-test="recipient">Enviando para <span class="chat-with">Todos</span> (<span class="chat-mode">Público</span>)</p>
             </div>
-            <ion-icon name="paper-plane-outline" onclick="sendMsg()"></ion-icon>
+            <ion-icon name="paper-plane-outline" data-test="send-message" onclick="sendMsg()"></ion-icon>
           </footer>
         </div>
       </div>
@@ -61,40 +63,40 @@
       <!-- Contacts Screen -->
       <div class="container-screen-contacts hidden">
         <div class="screen-contacts">
-          <div class="blurred-chat" onclick="closeContacts()"></div>
+          <div class="blurred-chat" data-test="overlay" onclick="closeContacts()"></div>
           <aside>
             <!-- Contact -->
             <h2>Escolha um contato<br>para enviar mensagem:</h2>
-            <div class="contacts">
-              <div class="box-option selected" onclick="selectContact(this);chatInfo()">
+            <ul class="contacts">
+              <li class="box-option selected" data-test="all" onclick="selectContact(this);chatInfo()">
                 <div class="option">
                   <ion-icon name="people"></ion-icon>
                   <p>Todos</p>
                 </div>
-                <ion-icon name="checkmark-sharp"></ion-icon>
-              </div>
+                <ion-icon name="checkmark-sharp" data-test="check"></ion-icon>
+              </li>
 
               <!-- Contacts Here -->
 
-            </div>
+            </ul>
             
             <!-- Visibility -->
             <h2>Escolha a visibilidade:</h2>
             <div class="visibilities">
-              <div class="box-option visibility selected" onclick="selectVisibility(this);chatInfo()">
+              <div class="box-option visibility selected" data-test="public" onclick="selectVisibility(this);chatInfo()">
                 <div class="option">
                   <ion-icon name="lock-open"></ion-icon>
                   <p>Público</p>
                 </div>
-                <ion-icon name="checkmark-sharp"></ion-icon>
+                <ion-icon name="checkmark-sharp" data-test="check"></ion-icon>
               </div>
               
-              <div class="box-option visibility" onclick="selectVisibility(this);chatInfo()">
+              <div class="box-option visibility" data-test="private" onclick="selectVisibility(this);chatInfo()">
                 <div class="option">
                   <ion-icon name="lock-closed"></ion-icon>
                   <p>Reservadamente</p>
                 </div>
-                <ion-icon name="checkmark-sharp" class="hidden"></ion-icon>
+                <ion-icon name="checkmark-sharp" data-test="check" class="hidden"></ion-icon>
               </div>
             </div>
           </aside>

@@ -8,9 +8,10 @@
     line-height: 20px;
 }
 
-p {
+p, li {
     font-size: 14px;
     line-height: 20px;
+    overflow-wrap: break-word;
 }
 
 h2 {
@@ -79,6 +80,10 @@ footer p, footer span {
     font-weight: 300;
     font-size: 14px;
     line-height: 25px;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 /* ------------------------------------------------------------ */
 
@@ -88,6 +93,13 @@ aside p {
     font-weight: 400;
     font-size: 16px;
     line-height: 19px;
+}
+
+.option p {
+    width: 160px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 /* ------------------------------------------------------------ */
 
@@ -215,7 +227,6 @@ header ion-icon {
     padding: 10px 8px;
     width: 100%;
     border-radius: 2px;
-    overflow-wrap: break-word;
 }
 
 .status {
@@ -269,6 +280,10 @@ footer input:focus {
 }
 footer input:focus::placeholder {
     visibility: hidden;
+}
+
+footer p {
+    width: 300px;
 }
 
 footer ion-icon {
