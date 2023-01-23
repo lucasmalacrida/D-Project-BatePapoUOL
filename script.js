@@ -46,17 +46,17 @@ function insertMsgsDOM(Response){
         if (data[i].type === 'status'){
             mainTag.innerHTML +=
             `<p class="msg status">
-                <span class="time">${data[i].time}</span> <span class="name">${data[i].from}</span> ${data[i].text}
+                <span class="time">(${data[i].time})</span><span class="name">${data[i].from}</span> ${data[i].text}
             </p>`;
         } else if (data[i].type === 'message'){
             mainTag.innerHTML +=
             `<p class="msg public">
-            <span class="time">${data[i].time}</span> <span class="name">${data[i].from}</span> para <span class="name">${data[i].to}</span>: ${data[i].text}
+            <span class="time">(${data[i].time})</span><span class="name">${data[i].from}</span> para <span class="name">${data[i].to}</span>: ${data[i].text}
             </p>`;
         } else if (data[i].type === 'private_message' &&  (data[i].to === user.name || data[i].from === user.name)){
             mainTag.innerHTML +=
             `<p class="msg private">
-                <span class="time">${data[i].time}</span> <span class="name">${data[i].from}</span> reservadamente para <span class="name">${data[i].to}</span>: ${data[i].text}
+                <span class="time">(${data[i].time})</span><span class="name">${data[i].from}</span> reservadamente para <span class="name">${data[i].to}</span>: ${data[i].text}
             </p>`;
         }
     }
