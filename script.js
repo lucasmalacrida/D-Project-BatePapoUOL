@@ -1,5 +1,5 @@
 // Login & Keep Logged: ------------------------------------------------------------------------------------------------------------------------
-let user, refreshMsgs, refreshContacts, refreshLogin, postStatus;
+let user, refreshMsgs, refreshContacts, refreshLogin;
 
 user = {name: prompt('Digite seu nome:')};
 axios.post('https://mock-api.driven.com.br/api/v6/uol/participants',user).then(loginSucess).catch(loginError);
@@ -25,7 +25,7 @@ function loginSucess(){
 }
 
 function keepLogged(){
-    postStatus = axios.post('https://mock-api.driven.com.br/api/v6/uol/status',user).catch(x => alert(`Erro ${x.response.status}`));
+    axios.post('https://mock-api.driven.com.br/api/v6/uol/status',user).catch(x => alert(`Erro ${x.response.status}`));
 }
 
 // Load Messages: ------------------------------------------------------------------------------------------------------------------------
@@ -66,14 +66,16 @@ function insertContactsDOM(Response){
     let contactsDiv = document.querySelector('.contacts');
     contactsDiv.innerHTML = contactsDivInitial;
     for (let i=0; i<data.length; i++){
-        contactsDiv.innerHTML +=
-            `<div class="box-option" onclick="selectContact(this);chatInfo()">
-            <div class="option">
-            <ion-icon name="person-circle"></ion-icon>
-            <p>${data[i].name}</p>
-            </div>
-            <ion-icon name="checkmark-sharp" class="hidden"></ion-icon>
-            </div>`;
+        if (data[i].name !== user.name){
+            contactsDiv.innerHTML +=
+                `<div class="box-option" onclick="selectContact(this);chatInfo()">
+                <div class="option">
+                <ion-icon name="person-circle"></ion-icon>
+                <p>${data[i].name}</p>
+                </div>
+                <ion-icon name="checkmark-sharp" class="hidden"></ion-icon>
+                </div>`;
+        }
     }
 }
 
@@ -131,4 +133,20 @@ function selectVisibility(button){
 function chatInfo(){
     document.querySelector(".chat-with").innerHTML = contact;
     document.querySelector(".chat-mode").innerHTML = visibility;
+}
+
+// Send Message ------------------------------------------------------------------------------------------------------------------------
+const msgInput = document.getElementById('input-msg');
+
+msgInput.addEventListener("keypress", function(event){ (event.key === "Enter")? document.querySelector("footer ion-icon").click() : null });
+
+function sendMsg(){
+    let msgObject = {
+        from: user.name,
+        to: contact,
+        text: msgInput.value,
+        type: (visibility === "Reservadamente")? "private_message" : "message"
+    }
+    axios.post('https://mock-api.driven.com.br/api/v6/uol/messages',msgObject).catch(x => alert(`Erro ${x.response.status}`));
+    msgInput.value = '';
 }
